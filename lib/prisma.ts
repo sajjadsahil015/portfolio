@@ -3,8 +3,16 @@ import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
 
 const prismaClientSingleton = () => {
-  const connectionString = process.env.DATABASE_URL;
-  const pool = new Pool({ connectionString });
+  let connectionString = process.env.DATABASE_URL?.trim();
+  if (connectionString) {
+    // Strip accidental surrounding quotes if copied from .env file
+    connectionString = connectionString.replace(/^["']|["']$/g, "");
+  }
+
+  const pool = new Pool({
+    connectionString,
+    ssl: connectionString ? { rejectUnauthorized: false } : undefined,
+  });
   const adapter = new PrismaPg(pool);
 
   return new PrismaClient({ adapter });
