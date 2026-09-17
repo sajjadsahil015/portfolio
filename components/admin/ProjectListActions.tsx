@@ -22,17 +22,17 @@ export default function ProjectListActions({ id }: { id: number }) {
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex items-center gap-1.5">
       <Link
         href={`/admin/projects/${id}`}
-        className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+        className="px-3 py-1.5 rounded-lg text-xs font-medium text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 transition-colors"
       >
         Edit
       </Link>
       <button
         onClick={handleDelete}
         disabled={isPending}
-        className="text-red-600 hover:text-red-800 text-sm font-medium disabled:opacity-50"
+        className="px-3 py-1.5 rounded-lg text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors disabled:opacity-50 cursor-pointer"
       >
         {isPending ? "Deleting..." : "Delete"}
       </button>

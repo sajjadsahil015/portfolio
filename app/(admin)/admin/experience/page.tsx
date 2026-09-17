@@ -2,6 +2,7 @@ import Link from "next/link";
 import prisma from "@/lib/prisma";
 import ExperienceListActions from "@/components/admin/ExperienceListActions";
 import { format } from "date-fns";
+import { Plus } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -18,32 +19,40 @@ export default async function AdminExperiencePage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Manage Experience</h1>
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Manage Experience</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">Manage your employment and education background.</p>
+        </div>
         <Link
           href="/admin/experience/new"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-primary text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 flex items-center gap-2 shadow-sm transition-opacity"
         >
+          <Plus size={18} />
           Add New Experience
         </Link>
       </div>
 
-      <div className="bg-white shadow overflow-hidden sm:rounded-md">
-        <ul role="list" className="divide-y divide-gray-200">
+      <div className="bg-white dark:bg-[#171726] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden rounded-xl">
+        <ul role="list" className="divide-y divide-slate-200 dark:divide-slate-800">
           {experiences.length === 0 ? (
-            <li className="p-6 text-center text-gray-500">No experience entries found.</li>
+            <li className="p-8 text-center text-slate-500 dark:text-slate-400">No experience entries found.</li>
           ) : (
             experiences.map((exp) => (
-              <li key={exp.id} className="px-6 py-4 flex items-center justify-between hover:bg-gray-50">
+              <li key={exp.id} className="px-6 py-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
                 <div>
                   <div className="flex items-center gap-2">
-                    <p className="text-sm font-medium text-gray-900">{exp.position}</p>
-                    <span className={`px-2 py-0.5 rounded text-xs ${exp.type === 'work' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'}`}>
+                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{exp.position}</p>
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                      exp.type === 'work' 
+                        ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20' 
+                        : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                    }`}>
                       {exp.type}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-500">{exp.company} {exp.location && `- ${exp.location}`}</p>
-                  <p className="text-xs text-gray-400">
-                    {exp.startDate ? format(new Date(exp.startDate), "MMM yyyy") : ""} - {exp.endDate ? format(new Date(exp.endDate), "MMM yyyy") : "Present"}
+                  <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">{exp.company} {exp.location && `• ${exp.location}`}</p>
+                  <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
+                    {exp.startDate ? format(new Date(exp.startDate), "MMM yyyy") : ""} — {exp.endDate ? format(new Date(exp.endDate), "MMM yyyy") : "Present"}
                   </p>
                 </div>
                 <ExperienceListActions id={exp.id} />

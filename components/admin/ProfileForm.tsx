@@ -95,78 +95,86 @@ export default function ProfileForm({ user }: ProfileFormProps) {
     });
   };
 
+  const inputClasses = "mt-1.5 block w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0e0e1b] text-slate-900 dark:text-white p-2.5 shadow-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors placeholder:text-slate-400";
+  const labelClasses = "block text-sm font-medium text-slate-700 dark:text-slate-300";
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-white p-6 rounded shadow-md max-w-2xl">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-white dark:bg-[#171726] border border-slate-200 dark:border-slate-800 p-6 md:p-8 rounded-2xl shadow-sm max-w-2xl">
       <input type="hidden" {...register("id")} />
       
-      <div className="grid gap-4">
+      <div className="grid gap-5">
         {/* Name */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Name</label>
+          <label className={labelClasses}>Full Name</label>
           <input
             {...register("name")}
-            className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            placeholder="Your name"
+            className={inputClasses}
           />
-          {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
         </div>
 
         {/* Email */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Email</label>
+          <label className={labelClasses}>Email Address</label>
           <input
             {...register("email")}
             type="email"
-            className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            placeholder="admin@example.com"
+            className={inputClasses}
           />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
         </div>
 
         {/* Profile Image URL */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Profile Image URL</label>
+          <label className={labelClasses}>Profile Image Path or URL</label>
           <input
             {...register("image")}
-            placeholder="https://example.com/photo.jpg"
-            className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            placeholder="/Profile.png or https://example.com/photo.jpg"
+            className={inputClasses}
           />
-          {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
+          {errors.image && <p className="text-red-500 text-sm mt-1">{errors.image.message}</p>}
         </div>
 
-        <div className="border-t border-gray-200 my-4 pt-4">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Change Password</h3>
+        <div className="border-t border-slate-200 dark:border-slate-800 my-2 pt-4">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Change Password</h3>
             
             {/* Current Password */}
             <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Current Password (Required)</label>
-            <input
+              <label className={labelClasses}>Current Password (Required to make changes)</label>
+              <input
                 {...register("currentPassword")}
                 type="password"
-                className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            />
-            {errors.currentPassword && <p className="text-red-500 text-sm">{errors.currentPassword.message}</p>}
+                placeholder="••••••••"
+                className={inputClasses}
+              />
+              {errors.currentPassword && <p className="text-red-500 text-sm mt-1">{errors.currentPassword.message}</p>}
             </div>
 
             {/* New Password */}
-            <div className="grid grid-cols-2 gap-4">
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">New Password</label>
-                    <input
-                        {...register("newPassword")}
-                        type="password"
-                        className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    />
-                    {errors.newPassword && <p className="text-red-500 text-sm">{errors.newPassword.message}</p>}
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClasses}>New Password (Optional)</label>
+                <input
+                  {...register("newPassword")}
+                  type="password"
+                  placeholder="Leave blank to keep current"
+                  className={inputClasses}
+                />
+                {errors.newPassword && <p className="text-red-500 text-sm mt-1">{errors.newPassword.message}</p>}
+              </div>
 
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">Confirm New Password</label>
-                    <input
-                        {...register("confirmNewPassword")}
-                        type="password"
-                        className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    />
-                    {errors.confirmNewPassword && <p className="text-red-500 text-sm">{errors.confirmNewPassword.message}</p>}
-                </div>
+              <div>
+                <label className={labelClasses}>Confirm New Password</label>
+                <input
+                  {...register("confirmNewPassword")}
+                  type="password"
+                  placeholder="Repeat new password"
+                  className={inputClasses}
+                />
+                {errors.confirmNewPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmNewPassword.message}</p>}
+              </div>
             </div>
         </div>
       </div>
@@ -174,7 +182,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
       <button
         type="submit"
         disabled={isPending}
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+        className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 transition-opacity cursor-pointer"
       >
         {isPending ? "Updating..." : "Update Profile"}
       </button>

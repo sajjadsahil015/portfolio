@@ -38,7 +38,7 @@ export default async function EditProjectPage({ params }: EditProjectPageProps) 
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Edit Project</h1>
+      <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Edit Project</h1>
       <ProjectForm initialData={initialData} />
     </div>
   );

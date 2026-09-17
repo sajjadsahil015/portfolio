@@ -33,12 +33,12 @@ export default function MessageActions({ id, isRead }: MessageActionsProps) {
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex items-center gap-1.5">
       {!isRead && (
         <button
           onClick={handleMarkAsRead}
           disabled={isPending}
-          className="text-blue-600 hover:text-blue-800 text-sm font-medium disabled:opacity-50"
+          className="px-3 py-1.5 rounded-lg text-xs font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 transition-colors disabled:opacity-50 cursor-pointer"
         >
           Mark Read
         </button>
@@ -46,7 +46,7 @@ export default function MessageActions({ id, isRead }: MessageActionsProps) {
       <button
         onClick={handleDelete}
         disabled={isPending}
-        className="text-red-600 hover:text-red-800 text-sm font-medium disabled:opacity-50"
+        className="px-3 py-1.5 rounded-lg text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors disabled:opacity-50 cursor-pointer"
       >
         Delete
       </button>

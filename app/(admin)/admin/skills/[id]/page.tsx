@@ -34,7 +34,7 @@ export default async function EditSkillPage({ params }: EditSkillPageProps) {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Edit Skill</h1>
+      <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Edit Skill</h1>
       <SkillForm initialData={initialData} />
     </div>
   );

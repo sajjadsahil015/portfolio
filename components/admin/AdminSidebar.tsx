@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { LayoutDashboard, FolderOpen, Briefcase, Wrench, Mail, LogOut, User } from 'lucide-react';
 import { signOut } from 'next-auth/react';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 export default function AdminSidebar() {
   const links = [
@@ -38,15 +39,25 @@ export default function AdminSidebar() {
           })}
         </ul>
       </nav>
-      <div className="p-4 border-t border-slate-800 mt-auto">
+      <div className="p-4 border-t border-slate-800 mt-auto space-y-2">
+        <div className="flex items-center justify-between px-2 py-1">
+          <span className="text-xs text-slate-400 font-medium">Theme</span>
+          <ThemeToggle />
+        </div>
+        <Link
+          href="/"
+          target="_blank"
+          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors text-xs font-medium text-slate-400 hover:text-white"
+        >
+          View Live Site ↗
+        </Link>
         <button
           onClick={() => signOut({ callbackUrl: "/login" })}
-          className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium text-slate-300 hover:text-white w-full"
+          className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-red-500/10 text-red-400 hover:text-red-300 transition-colors text-sm font-medium w-full"
         >
           <LogOut size={18} />
           Logout
         </button>
-        <p className="text-xs text-slate-500 mt-4">Portfolio v1.0</p>
       </div>
     </aside>
   );
