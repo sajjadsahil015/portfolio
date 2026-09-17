@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  imageUrl    String
+  techStack   String
+  liveUrl     String?
+  githubUrl   String?
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// NextAuth.js models
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?   // For Credentials provider
+  role          String    @default("user") // "admin" or "user"
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Experience {
+  id          Int      @id @default(autoincrement())
+  type        String   // "work" or "education"
+  position    String   // Role (e.g. "Senior Developer" or "BS Computer Science")
+  company     String   // Company Name or University Name
+  location    String?  // e.g. "Karachi, Pakistan"
+  startDate   DateTime
+  endDate     DateTime? // If null, it means "Present" (Current Job)
+  description String   // Stored as a paragraph or bullet points separated by newlines
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Skill {
+  id       Int    @id @default(autoincrement())
+  name     String // e.g. "React", "Node.js", "Docker"
+  category String // e.g. "frontend", "backend", "devops", "tools"
+  iconUrl  String? // Optional: URL to an SVG/PNG icon
+  proficiency Int? // Optional: 1-100 scale (for progress bars if needed later)
+  createdAt DateTime @default(now())
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  subject   String?
+  content   String   // The actual message body
+  isRead    Boolean  @default(false) // To highlight unread messages in Admin
+  createdAt DateTime @default(now())
+}
