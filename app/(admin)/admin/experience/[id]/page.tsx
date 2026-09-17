@@ -2,6 +2,8 @@ import ExperienceForm from "@/components/admin/ExperienceForm";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 interface EditExperiencePageProps {
   params: Promise<{ id: string }>;
 }
@@ -29,8 +31,8 @@ export default async function EditExperiencePage({ params }: EditExperiencePageP
     position: experience.position,
     company: experience.company,
     location: experience.location ?? "",
-    startDate: experience.startDate.toISOString().split('T')[0],
-    endDate: experience.endDate ? experience.endDate.toISOString().split('T')[0] : "",
+    startDate: experience.startDate ? new Date(experience.startDate).toISOString().split('T')[0] : "",
+    endDate: experience.endDate ? new Date(experience.endDate).toISOString().split('T')[0] : "",
     description: experience.description,
   };
 

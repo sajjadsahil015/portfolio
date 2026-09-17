@@ -1,12 +1,17 @@
 import AboutClientView from "@/components/features/AboutClientView";
 import prisma from "@/lib/prisma";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export default async function AboutPage() {
-  const experiences = await prisma.experience.findMany({
-    orderBy: { startDate: "desc" },
-  });
+  let experiences: any[] = [];
+  try {
+    experiences = await prisma.experience.findMany({
+      orderBy: { startDate: "desc" },
+    });
+  } catch (err) {
+    console.error("Failed to fetch experiences:", err);
+  }
 
   return (
     <AboutClientView experiences={experiences} />

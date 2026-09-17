@@ -2,10 +2,17 @@ import Link from "next/link";
 import prisma from "@/lib/prisma";
 import SkillListActions from "@/components/admin/SkillListActions";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminSkillsPage() {
-  const skills = await prisma.skill.findMany({
-    orderBy: { category: "asc" },
-  });
+  let skills: any[] = [];
+  try {
+    skills = await prisma.skill.findMany({
+      orderBy: { category: "asc" },
+    });
+  } catch (err) {
+    console.error("Failed to load skills:", err);
+  }
 
   return (
     <div className="space-y-6">

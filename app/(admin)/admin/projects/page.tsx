@@ -2,10 +2,17 @@ import Link from "next/link";
 import prisma from "@/lib/prisma";
 import ProjectListActions from "@/components/admin/ProjectListActions";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminProjectsPage() {
-  const projects = await prisma.project.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  let projects: any[] = [];
+  try {
+    projects = await prisma.project.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+  } catch (error) {
+    console.error("Failed to fetch projects:", error);
+  }
 
   return (
     <div className="space-y-6">

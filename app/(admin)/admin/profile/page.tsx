@@ -4,6 +4,8 @@ import ProfileForm from "@/components/admin/ProfileForm";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma"; // Import prisma
 
+export const dynamic = "force-dynamic";
+
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
 

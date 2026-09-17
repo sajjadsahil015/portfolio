@@ -3,10 +3,17 @@ import prisma from "@/lib/prisma";
 import ExperienceListActions from "@/components/admin/ExperienceListActions";
 import { format } from "date-fns";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminExperiencePage() {
-  const experiences = await prisma.experience.findMany({
-    orderBy: { startDate: "desc" },
-  });
+  let experiences: any[] = [];
+  try {
+    experiences = await prisma.experience.findMany({
+      orderBy: { startDate: "desc" },
+    });
+  } catch (error) {
+    console.error("Failed to fetch experiences:", error);
+  }
 
   return (
     <div className="space-y-6">
@@ -36,7 +43,7 @@ export default async function AdminExperiencePage() {
                   </div>
                   <p className="text-sm text-gray-500">{exp.company} {exp.location && `- ${exp.location}`}</p>
                   <p className="text-xs text-gray-400">
-                    {format(exp.startDate, "MMM yyyy")} - {exp.endDate ? format(exp.endDate, "MMM yyyy") : "Present"}
+                    {exp.startDate ? format(new Date(exp.startDate), "MMM yyyy") : ""} - {exp.endDate ? format(new Date(exp.endDate), "MMM yyyy") : "Present"}
                   </p>
                 </div>
                 <ExperienceListActions id={exp.id} />

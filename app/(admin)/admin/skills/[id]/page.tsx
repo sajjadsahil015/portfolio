@@ -2,6 +2,8 @@ import SkillForm from "@/components/admin/SkillForm";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 interface EditSkillPageProps {
   params: Promise<{ id: string }>;
 }

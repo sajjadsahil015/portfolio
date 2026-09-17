@@ -2,15 +2,21 @@ import MessageActions from "@/components/admin/MessageActions";
 import prisma from "@/lib/prisma";
 import { format } from "date-fns";
 
+export const dynamic = "force-dynamic";
 export const revalidate = 0; // Always fresh for admin inbox
 
 export default async function AdminMessagesPage() {
-  const messages = await prisma.message.findMany({
-    orderBy: [
-      { isRead: "asc" }, // Unread first
-      { createdAt: "desc" }, // Newest first
-    ],
-  });
+  let messages: any[] = [];
+  try {
+    messages = await prisma.message.findMany({
+      orderBy: [
+        { isRead: "asc" }, // Unread first
+        { createdAt: "desc" }, // Newest first
+      ],
+    });
+  } catch (err) {
+    console.error("Failed to load messages:", err);
+  }
 
   return (
     <div className="space-y-6">
@@ -41,7 +47,7 @@ export default async function AdminMessagesPage() {
                     </p>
                   </div>
                   <span className="text-xs text-gray-400 whitespace-nowrap ml-4">
-                    {format(msg.createdAt, "MMM d, yyyy h:mm a")}
+                    {msg.createdAt ? format(new Date(msg.createdAt), "MMM d, yyyy h:mm a") : ""}
                   </span>
                 </div>
                 
