@@ -25,7 +25,7 @@ export default function Hero({ user }: HeroProps) {
 
   const transitionProps: Transition = { delay: 0.2, duration: 0.8, type: "spring", stiffness: 100, damping: 10 };
 
-  const profileImage = user?.image || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop";
+  const profileImage = user?.image || "/Profile.png";
 
   return (
     <section className="relative flex flex-col items-center justify-center min-h-[90vh] text-center space-y-10 px-4 overflow-hidden pt-16">
