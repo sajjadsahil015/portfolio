@@ -4,8 +4,9 @@ import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const dbUrl = process.env.DATABASE_URL;
-  const isUrlPresent = !!dbUrl;
+  const rawDbUrl = process.env.DATABASE_URL;
+  const isUrlPresent = !!rawDbUrl;
+  const dbUrl = rawDbUrl ? rawDbUrl.replace(/[\r\n\s]+/g, "").replace(/^["']|["']$/g, "") : "";
   const maskedUrl = dbUrl
     ? dbUrl.replace(/:\/\/([^:]+):([^@]+)@/, "://$1:****@")
     : "NOT_SET";

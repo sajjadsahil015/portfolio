@@ -3,10 +3,10 @@ import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
 
 const prismaClientSingleton = () => {
-  let connectionString = process.env.DATABASE_URL?.trim();
+  let connectionString = process.env.DATABASE_URL;
   if (connectionString) {
-    // Strip accidental surrounding quotes if copied from .env file
-    connectionString = connectionString.replace(/^["']|["']$/g, "");
+    // Strip all accidental whitespace, newlines (\n, \r), and surrounding quotes
+    connectionString = connectionString.replace(/[\r\n\s]+/g, "").replace(/^["']|["']$/g, "");
   }
 
   const pool = new Pool({
