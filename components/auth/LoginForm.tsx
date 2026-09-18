@@ -53,13 +53,10 @@ export default function LoginForm() {
         <div className="w-full max-w-md space-y-8 p-8 bg-card border border-border rounded-xl shadow-lg">
           <div>
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-foreground">
-              Sign in to your account
+              Admin Portal
             </h2>
             <p className="mt-2 text-center text-sm text-muted-foreground">
-              Or{" "}
-              <Link href="/register" className="font-medium text-primary hover:text-primary/80">
-                create an account
-              </Link>
+              Sign in to manage your portfolio
             </p>
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>

@@ -23,8 +23,10 @@ export async function createUser(data: z.infer<typeof userSchema>) {
 
   try {
     const existingCount = await prisma.user.count();
-    // The very first user is admin; all subsequent registrations are normal users
-    const role = existingCount === 0 ? "admin" : "user";
+    if (existingCount > 0) {
+      return { error: "Public registration is disabled. This is a private personal portfolio." };
+    }
+    const role = "admin";
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await prisma.user.create({
