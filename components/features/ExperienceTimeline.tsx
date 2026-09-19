@@ -12,10 +12,12 @@ interface ExperienceTimelineProps {
 export default function ExperienceTimeline({ experiences }: ExperienceTimelineProps) {
   const work = experiences.filter(e => e.type === 'work');
   const education = experiences.filter(e => e.type === 'education');
+  const hasWork = work.length > 0;
+  const hasEducation = education.length > 0;
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, x: -50 },
-    show: { opacity: 1, x: 0 }, // Removed transition from here
+    show: { opacity: 1, x: 0 },
   };
 
   const containerVariants: Variants = {
@@ -28,25 +30,34 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
     },
   };
 
-  const transitionProps: Transition = { type: "spring", stiffness: 100, damping: 10 }; // Explicitly typed as Transition
+  const transitionProps: Transition = { type: "spring", stiffness: 100, damping: 10 };
+
+  if (!hasWork && !hasEducation) {
+    return (
+      <div className="text-center py-12 text-muted-foreground">
+        <p>Experience details coming soon.</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="grid md:grid-cols-2 gap-12 md:gap-20">
+    <div className={`grid ${hasWork && hasEducation ? "md:grid-cols-2 gap-12 md:gap-20" : "max-w-2xl mx-auto"}`}>
       {/* Work Experience */}
-      <div>
-        <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
-          <div className="p-2 bg-primary/10 rounded-lg text-primary">
-            <Briefcase size={24} />
-          </div>
-          Work Experience
-        </h2>
-        <motion.div 
-          className="space-y-12 border-l-2 border-border ml-3 pl-8 sm:ml-4 sm:pl-10 relative"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
-        >
+      {hasWork && (
+        <div>
+          <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-lg text-primary">
+              <Briefcase size={24} />
+            </div>
+            Work Experience
+          </h2>
+          <motion.div 
+            className="space-y-12 border-l-2 border-border ml-3 pl-8 sm:ml-4 sm:pl-10 relative"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+          >
           {work.map((exp) => (
             <motion.div key={exp.id} className="relative group" variants={itemVariants} transition={transitionProps}>
               <span className="absolute -left-[41px] sm:-left-[49px] top-1 h-5 w-5 rounded-full border-4 border-background bg-primary group-hover:scale-125 transition-transform duration-300" />
@@ -76,8 +87,10 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
           ))}
         </motion.div>
       </div>
+      )}
 
       {/* Education */}
+      {hasEducation && (
       <div>
         <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
           <div className="p-2 bg-emerald-500/10 rounded-lg text-emerald-500">
@@ -86,7 +99,7 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
           Education
         </h2>
         <motion.div 
-          className="space-y-12 border-l-2 border-border ml-3 pl-8 sm:-ml-4 sm:pl-10 relative"
+          className="space-y-12 border-l-2 border-border ml-3 pl-8 sm:ml-4 sm:pl-10 relative"
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
@@ -121,6 +134,7 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
           ))}
         </motion.div>
       </div>
+      )}
     </div>
   );
 }
