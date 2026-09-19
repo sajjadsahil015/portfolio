@@ -17,28 +17,44 @@ export default function SkillForm({ initialData }: SkillFormProps) {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(skillSchema),
     defaultValues: initialData || {
       name: "",
-      category: "Frontend",
+      category: "Agentic AI",
       iconUrl: "",
       proficiency: undefined,
     },
   });
 
+  const currentIconUrl = watch("iconUrl");
+
   const onSubmit = async (data: SkillFormValues) => {
+    let formattedIconUrl = data.iconUrl?.trim() || "";
+    if (
+      formattedIconUrl &&
+      !formattedIconUrl.startsWith("http://") &&
+      !formattedIconUrl.startsWith("https://") &&
+      !formattedIconUrl.startsWith("/")
+    ) {
+      formattedIconUrl = "/" + formattedIconUrl;
+    }
+
+    const payload = { ...data, iconUrl: formattedIconUrl };
+
     startTransition(async () => {
       if (initialData) {
-        const res = await updateSkill(initialData.id, data);
+        const res = await updateSkill(initialData.id, payload);
         if (res?.error) {
           toast.error(res.error);
         } else {
           toast.success("Skill updated successfully!");
         }
       } else {
-        const res = await createSkill(data);
+        const res = await createSkill(payload);
         if (res?.error) {
           toast.error(res.error);
         } else {
@@ -50,6 +66,21 @@ export default function SkillForm({ initialData }: SkillFormProps) {
 
   const inputClasses = "mt-1.5 block w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0e0e1b] text-slate-900 dark:text-white p-2.5 shadow-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors placeholder:text-slate-400";
   const labelClasses = "block text-sm font-medium text-slate-700 dark:text-slate-300";
+
+  const aiPresets = [
+    { label: "OpenAI", url: "/icons/openai.svg" },
+    { label: "LangChain", url: "/icons/langchain.svg" },
+    { label: "CrewAI", url: "/icons/crewai.svg" },
+    { label: "Claude", url: "/icons/anthropic.svg" },
+    { label: "Python", url: "/icons/python.svg" },
+    { label: "openai_dark", url: "/openai_dark.svg" },
+  ];
+
+  const previewSrc = currentIconUrl
+    ? currentIconUrl.startsWith("http") || currentIconUrl.startsWith("/")
+      ? currentIconUrl
+      : `/${currentIconUrl}`
+    : null;
 
   return (
     <>
@@ -72,11 +103,12 @@ export default function SkillForm({ initialData }: SkillFormProps) {
             <label className={labelClasses}>Category</label>
             <input
               {...register("category")}
-              placeholder="e.g. Frontend, Backend, Tools"
+              placeholder="e.g. Agentic AI, Frontend, Backend, Tools"
               list="categories"
               className={inputClasses}
             />
             <datalist id="categories">
+              <option value="Agentic AI" />
               <option value="Frontend" />
               <option value="Backend" />
               <option value="DevOps" />
@@ -88,13 +120,46 @@ export default function SkillForm({ initialData }: SkillFormProps) {
 
           {/* Icon URL */}
           <div>
-            <label className={labelClasses}>Icon URL (Optional)</label>
-            <input
-              {...register("iconUrl")}
-              placeholder="https://cdn.jsdelivr.net/.../react-original.svg"
-              className={inputClasses}
-            />
+            <label className={labelClasses}>Icon URL or Local Path (Optional)</label>
+            <div className="flex gap-2 items-center mt-1.5">
+              <input
+                {...register("iconUrl")}
+                placeholder="e.g. /icons/openai.svg or https://..."
+                className="block w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0e0e1b] text-slate-900 dark:text-white p-2.5 shadow-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors placeholder:text-slate-400"
+              />
+              {previewSrc && (
+                <div className="w-11 h-11 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 flex items-center justify-center p-2 shrink-0">
+                  <img
+                    src={previewSrc}
+                    alt="Icon Preview"
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      (e.target as HTMLElement).style.display = "none";
+                    }}
+                  />
+                </div>
+              )}
+            </div>
             {errors.iconUrl && <p className="text-red-500 text-sm mt-1">{errors.iconUrl.message}</p>}
+
+            {/* Quick AI Presets */}
+            <div className="mt-2.5">
+              <span className="text-xs text-slate-500 dark:text-slate-400 block mb-1">
+                Quick Select Icon (1-Click):
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {aiPresets.map((preset) => (
+                  <button
+                    key={preset.label}
+                    type="button"
+                    onClick={() => setValue("iconUrl", preset.url, { shouldValidate: true })}
+                    className="text-xs px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-primary/20 hover:text-primary transition-colors border border-slate-200 dark:border-slate-700"
+                  >
+                    {preset.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Proficiency */}

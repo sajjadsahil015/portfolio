@@ -22,13 +22,21 @@ async function main() {
 
   // 2. Seed Skills
   const skillsData = [
+    // Agentic AI
+    { name: "LangChain & LangGraph", category: "Agentic AI", proficiency: 90, iconUrl: "" },
+    { name: "CrewAI & AutoGen", category: "Agentic AI", proficiency: 85, iconUrl: "" },
+    { name: "OpenAI & Anthropic APIs", category: "Agentic AI", proficiency: 95, iconUrl: "" },
+    { name: "Vector DBs & RAG", category: "Agentic AI", proficiency: 85, iconUrl: "" },
+    // Frontend
     { name: "React", category: "Frontend", proficiency: 95, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
     { name: "Next.js", category: "Frontend", proficiency: 90, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
     { name: "TypeScript", category: "Frontend", proficiency: 85, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
     { name: "Tailwind CSS", category: "Frontend", proficiency: 95, iconUrl: "" },
+    // Backend
     { name: "Node.js", category: "Backend", proficiency: 80, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
     { name: "Prisma", category: "Backend", proficiency: 85, iconUrl: "" },
     { name: "PostgreSQL", category: "Backend", proficiency: 75, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+    // Tools
     { name: "Docker", category: "Tools", proficiency: 70, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
     { name: "Git", category: "Tools", proficiency: 90, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
   ];

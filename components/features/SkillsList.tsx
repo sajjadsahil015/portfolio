@@ -1,7 +1,7 @@
 "use client";
 
 import { Skill } from "@/lib/generated/client/client";
-import { Code2, Database, Wrench, Cpu, Layers } from "lucide-react";
+import { Code2, Database, Wrench, Cpu, Layers, Bot, Brain, Sparkles } from "lucide-react";
 import { motion, Variants, Transition } from "framer-motion"; // Import Transition
 import Image from "next/image";
 
@@ -10,6 +10,10 @@ interface SkillsListProps {
 }
 
 const categoryIcons: Record<string, any> = {
+  "Agentic AI": Bot,
+  "AI & Agents": Bot,
+  "Artificial Intelligence": Brain,
+  AI: Sparkles,
   Frontend: Code2,
   Backend: Database,
   Tools: Wrench,
@@ -77,7 +81,7 @@ export default function SkillsList({ skills = [] }: SkillsListProps) {
                     transition={transitionProps}
                   >
                     {skill.iconUrl ? (
-                      <Image width={24} height={24} src={skill.iconUrl} alt={skill.name} className="w-6 h-6 object-contain group-hover:scale-110 transition-transform" />
+                      <Image width={24} height={24} src={skill.iconUrl} alt={skill.name} unoptimized className="w-6 h-6 object-contain group-hover:scale-110 transition-transform" />
                     ) : (
                       <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
                          <span className="text-[10px] font-bold text-primary">{skill.name[0]}</span>
