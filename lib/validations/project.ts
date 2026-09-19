@@ -7,9 +7,12 @@ export const projectSchema = z.object({
   description: z.string().min(10, {
     message: "Description must be at least 10 characters.",
   }),
-  imageUrl: z.string().url({
-    message: "Please enter a valid URL for the image.",
-  }),
+  imageUrl: z.string().min(1, {
+    message: "Image URL or local path is required.",
+  }).refine(
+    (val) => val.startsWith("/") || val.startsWith("http://") || val.startsWith("https://"),
+    { message: "Must be a valid URL (https://...) or a local path (/projects/...)" }
+  ),
   techStack: z.string().min(2, {
     message: "Tech stack is required (comma separated).",
   }),

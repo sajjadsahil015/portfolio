@@ -86,12 +86,15 @@ export default function ProjectForm({ initialData }: ProjectFormProps) {
 
           {/* Image URL */}
           <div>
-            <label className={labelClasses}>Image URL</label>
+            <label className={labelClasses}>Image URL or Local Path</label>
             <input
               {...register("imageUrl")}
-              placeholder="https://example.com/image.png"
+              placeholder="/projects/my-project.png or https://example.com/image.png"
               className={inputClasses}
             />
+            <p className="text-xs text-slate-400 mt-1">
+              Tip: Put your image inside <code className="text-primary font-mono">public/projects/</code> and write <code className="text-primary font-mono">/projects/your-image.png</code>
+            </p>
             {errors.imageUrl && <p className="text-red-500 text-sm mt-1">{errors.imageUrl.message}</p>}
           </div>
 
