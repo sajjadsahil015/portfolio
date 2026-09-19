@@ -41,7 +41,7 @@ export default function ProjectCard({ title, description, imageUrl, techStack, l
       </div>
       <div className="p-5 flex flex-col flex-grow">
         <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">{title}</h3>
-        <p className="text-muted-foreground mb-4 text-sm flex-grow line-clamp-3 leading-relaxed">{description}</p>
+        <p className="text-muted-foreground mb-4 text-sm line-clamp-3 leading-relaxed">{description}</p>
         
         <div className="flex flex-wrap gap-2 mb-6">
           {techs.map((tech, index) => (
