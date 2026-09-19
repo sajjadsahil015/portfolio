@@ -41,7 +41,7 @@ export default function Hero({ user }: HeroProps) {
         transition={{ duration: 0.6, type: "spring" }}
         className="relative group"
       >
-        <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
+        <div className="absolute -inset-1 bg-linear-to-r from-blue-500 to-indigo-600 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
         <div className="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl">
             <Image 
             src={profileImage} 
@@ -75,7 +75,7 @@ export default function Hero({ user }: HeroProps) {
           transition={{ ...transitionProps, delay: 0.4 }}
           className="text-lg md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
         >
-          Full-stack developer crafting beautiful, high-performance web applications with modern technologies.
+          Agentic AI Developer & FullStack Developer - building intelligent, autonomous AI agents and modern web applications.
         </motion.p>
       </div>
 

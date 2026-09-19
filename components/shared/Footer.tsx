@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { Github, Linkedin, Mail, Copy, Check, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Twitter, Facebook, Mail, Copy, Check, ExternalLink } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -54,19 +54,51 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border/50 gap-6">
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center pt-8 border-t border-border/50 gap-6">
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 text-center md:text-left">
             &copy; {new Date().getFullYear()} Sajjad Hassan. All rights reserved.
           </p>
           
-          <div className="flex gap-4">
-            <Link href="#" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-secondary/50 dark:bg-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-primary dark:hover:text-white hover:bg-primary/10 transition-all border border-border">
+          <div className="flex gap-4 justify-center">
+            <Link 
+              href="https://github.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="GitHub"
+              className="w-10 h-10 rounded-full bg-secondary/50 dark:bg-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-primary dark:hover:text-white hover:bg-primary/10 transition-all border border-border"
+            >
               <Github size={20} />
             </Link>
-            <Link href="#" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-secondary/50 dark:bg-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-primary dark:hover:text-white hover:bg-primary/10 transition-all border border-border">
+            <Link 
+              href="https://linkedin.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="LinkedIn"
+              className="w-10 h-10 rounded-full bg-secondary/50 dark:bg-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-primary dark:hover:text-white hover:bg-primary/10 transition-all border border-border"
+            >
               <Linkedin size={20} />
             </Link>
+            <Link 
+              href="https://twitter.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="Twitter"
+              className="w-10 h-10 rounded-full bg-secondary/50 dark:bg-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-primary dark:hover:text-white hover:bg-primary/10 transition-all border border-border"
+            >
+              <Twitter size={20} />
+            </Link>
+            <Link 
+              href="https://facebook.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="Facebook"
+              className="w-10 h-10 rounded-full bg-secondary/50 dark:bg-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-primary dark:hover:text-white hover:bg-primary/10 transition-all border border-border"
+            >
+              <Facebook size={20} />
+            </Link>
           </div>
+
+          <div className="hidden md:block" />
         </div>
       </div>
     </footer>
