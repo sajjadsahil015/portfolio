@@ -108,12 +108,11 @@ export default function SkillForm({ initialData }: SkillFormProps) {
               className={inputClasses}
             />
             <datalist id="categories">
-              <option value="Agentic AI" />
-              <option value="Frontend" />
-              <option value="Backend" />
-              <option value="DevOps" />
-              <option value="Tools" />
-              <option value="Languages" />
+              <option value="Agentic AI & LLMs" />
+              <option value="Vector & Data" />
+              <option value="Backend Development" />
+              <option value="Frontend Development" />
+              <option value="Tools & Practices" />
             </datalist>
             {errors.category && <p className="text-red-500 text-sm mt-1">{errors.category.message}</p>}
           </div>

@@ -10,15 +10,20 @@ interface SkillsListProps {
 }
 
 const categoryIcons: Record<string, any> = {
+  "Agentic AI & LLMs": Bot,
   "Agentic AI": Bot,
   "AI & Agents": Bot,
+  "Vector & Data": Database,
+  "Backend Development": Database,
+  "Frontend Development": Code2,
+  "Tools & Practices": Wrench,
   "Artificial Intelligence": Brain,
   AI: Sparkles,
   Frontend: Code2,
   Backend: Database,
   Tools: Wrench,
   DevOps: Layers,
-  Languages: Code2, // Added for potential language skills
+  Languages: Code2,
   default: Cpu,
 };
 

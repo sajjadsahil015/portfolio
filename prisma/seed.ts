@@ -22,23 +22,46 @@ async function main() {
 
   // 2. Seed Skills
   const skillsData = [
-    // Agentic AI
-    { name: "LangChain & LangGraph", category: "Agentic AI", proficiency: 90, iconUrl: "" },
-    { name: "CrewAI & AutoGen", category: "Agentic AI", proficiency: 85, iconUrl: "" },
-    { name: "OpenAI & Anthropic APIs", category: "Agentic AI", proficiency: 95, iconUrl: "" },
-    { name: "Vector DBs & RAG", category: "Agentic AI", proficiency: 85, iconUrl: "" },
-    // Frontend
-    { name: "React", category: "Frontend", proficiency: 95, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-    { name: "Next.js", category: "Frontend", proficiency: 90, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-    { name: "TypeScript", category: "Frontend", proficiency: 85, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-    { name: "Tailwind CSS", category: "Frontend", proficiency: 95, iconUrl: "" },
-    // Backend
-    { name: "Node.js", category: "Backend", proficiency: 80, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-    { name: "Prisma", category: "Backend", proficiency: 85, iconUrl: "" },
-    { name: "PostgreSQL", category: "Backend", proficiency: 75, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
-    // Tools
-    { name: "Docker", category: "Tools", proficiency: 70, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-    { name: "Git", category: "Tools", proficiency: 90, iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+    // Agentic AI & LLMs
+    { name: "OpenAI Agents SDK", category: "Agentic AI & LLMs", proficiency: 95, iconUrl: "/icons/openai.svg" },
+    { name: "Claude-based Agent Development", category: "Agentic AI & LLMs", proficiency: 95, iconUrl: "/icons/anthropic.svg" },
+    { name: "Prompt Engineering", category: "Agentic AI & LLMs", proficiency: 90, iconUrl: "/icons/prompt_engineering.svg" },
+    { name: "Context Engineering", category: "Agentic AI & LLMs", proficiency: 85, iconUrl: "/icons/context_engineering.svg" },
+    { name: "Retrieval-Augmented Generation (RAG)", category: "Agentic AI & LLMs", proficiency: 90, iconUrl: "/icons/rag.svg" },
+    { name: "Google Gemini API", category: "Agentic AI & LLMs", proficiency: 90, iconUrl: "/icons/gemini.svg" },
+    { name: "Cohere API", category: "Agentic AI & LLMs", proficiency: 80, iconUrl: "/icons/cohere.svg" },
+    { name: "Hugging Face", category: "Agentic AI & LLMs", proficiency: 85, iconUrl: "/icons/huggingface.svg" },
+
+    // Vector & Data
+    { name: "Qdrant Cloud", category: "Vector & Data", proficiency: 85, iconUrl: "/icons/qdrant.svg" },
+    { name: "PostgreSQL (Neon)", category: "Vector & Data", proficiency: 90, iconUrl: "/icons/neon.svg" },
+    { name: "SQLite", category: "Vector & Data", proficiency: 90, iconUrl: "/icons/sqlite.svg" },
+    { name: "SQLModel", category: "Vector & Data", proficiency: 85, iconUrl: "/icons/sqlmodel.svg" },
+    { name: "SQLAlchemy", category: "Vector & Data", proficiency: 85, iconUrl: "/icons/sqlmodel.svg" },
+    { name: "Pydantic", category: "Vector & Data", proficiency: 90, iconUrl: "/icons/pydantic.svg" },
+
+    // Backend Development
+    { name: "Python", category: "Backend Development", proficiency: 95, iconUrl: "/icons/python.svg" },
+    { name: "FastAPI", category: "Backend Development", proficiency: 90, iconUrl: "/icons/fastapi.svg" },
+    { name: "RESTful API Design", category: "Backend Development", proficiency: 90, iconUrl: "/icons/api.svg" },
+    { name: "Docker", category: "Backend Development", proficiency: 80, iconUrl: "/icons/docker.svg" },
+
+    // Frontend Development
+    { name: "React", category: "Frontend Development", proficiency: 95, iconUrl: "/icons/react.svg" },
+    { name: "Next.js (App Router)", category: "Frontend Development", proficiency: 95, iconUrl: "/icons/nextjs.svg" },
+    { name: "TypeScript", category: "Frontend Development", proficiency: 90, iconUrl: "/icons/typescript.svg" },
+    { name: "Redux Toolkit", category: "Frontend Development", proficiency: 85, iconUrl: "/icons/redux.svg" },
+    { name: "Tailwind CSS", category: "Frontend Development", proficiency: 95, iconUrl: "/icons/tailwind.svg" },
+    { name: "Leaflet", category: "Frontend Development", proficiency: 80, iconUrl: "/icons/leaflet.svg" },
+    { name: "Docusaurus", category: "Frontend Development", proficiency: 80, iconUrl: "/icons/docusaurus.svg" },
+
+    // Tools & Practices
+    { name: "Git/GitHub", category: "Tools & Practices", proficiency: 95, iconUrl: "/icons/github.svg" },
+    { name: "Vercel", category: "Tools & Practices", proficiency: 90, iconUrl: "/icons/vercel.svg" },
+    { name: "Render", category: "Tools & Practices", proficiency: 85, iconUrl: "/icons/render.svg" },
+    { name: "uv", category: "Tools & Practices", proficiency: 85, iconUrl: "/icons/uv.svg" },
+    { name: "Spec-Driven Development (SDD)", category: "Tools & Practices", proficiency: 95, iconUrl: "/icons/sdd.svg" },
+    { name: "Claude Code", category: "Tools & Practices", proficiency: 90, iconUrl: "/icons/claude_code.svg" },
   ];
 
   for (const skill of skillsData) {
