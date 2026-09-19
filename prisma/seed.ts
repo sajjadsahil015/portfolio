@@ -105,34 +105,16 @@ async function main() {
   }
   console.log("Seeded Projects.");
 
-  // 4. Seed Experience
+  // 4. Seed Experience (Education only by default; Work is dynamically displayed when added via Admin)
   const experienceData = [
-    {
-      type: "work",
-      position: "Senior Full Stack Developer",
-      company: "Tech Solutions Inc.",
-      location: "San Francisco, CA",
-      startDate: new Date("2023-01-01"),
-      endDate: null,
-      description: "Leading a team of 5 developers in building scalable web applications. Architected a microservices-based backend using Node.js."
-    },
-    {
-      type: "work",
-      position: "Frontend Developer",
-      company: "Creative Agency",
-      location: "Remote",
-      startDate: new Date("2020-06-01"),
-      endDate: new Date("2022-12-31"),
-      description: "Developed responsive websites for high-profile clients. Collaborated with designers to implement pixel-perfect UIs."
-    },
     {
       type: "education",
       position: "BS Computer Science",
       company: "University of Technology",
-      location: "New York, NY",
-      startDate: new Date("2016-09-01"),
-      endDate: new Date("2020-05-01"),
-      description: "Graduated with Honors. Specialized in Software Engineering and Artificial Intelligence."
+      location: "Karachi, Pakistan",
+      startDate: new Date("2020-09-01"),
+      endDate: new Date("2024-05-01"),
+      description: "Specialized in Artificial Intelligence, Software Engineering, and Modern Web Architectures."
     }
   ];
 
